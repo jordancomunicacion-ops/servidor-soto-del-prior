@@ -1,0 +1,99 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+}
+
+model User {
+  id            String    @id @default(cuid())
+  name          String?
+  email         String?   @unique
+  emailVerified DateTime?
+  password      String?
+  role          String    @default("EMPLOYEE") // ADMIN, CHEF, EMPLOYEE
+  pinCode       String?   @unique
+  image         String?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  tasks EmployeeTask[]
+}
+
+model Provider {
+  id        Int       @id @default(autoincrement())
+  name      String
+  contact   String?
+  products  Product[]
+}
+
+model Product {
+  id           Int     @id @default(autoincrement())
+  name         String
+  unitBase     String  // kg, l, ud
+  pricePerUnit Decimal
+  wastePercent Decimal // 0.15 = 15%
+  providerId   Int
+  provider     Provider @relation(fields: [providerId], references: [id])
+
+  recipeIngredients RecipeIngredient[]
+}
+
+model Recipe {
+  id             Int     @id @default(autoincrement())
+  name           String
+  portionsOutput Int     @default(1)
+  
+  ingredients    RecipeIngredient[] // Ingredients used IN this recipe
+  usedInRecipes  RecipeIngredient[] @relation("SubRecipe") // Recipes that use THIS recipe
+  
+  eventDishes    EventDish[]
+  tasks          EmployeeTask[]
+}
+
+model RecipeIngredient {
+  id          Int     @id @default(autoincrement())
+  recipeId    Int
+  recipe      Recipe  @relation(fields: [recipeId], references: [id])
+  
+  // Either product OR subRecipe is set
+  productId   Int?
+  product     Product? @relation(fields: [productId], references: [id])
+  
+  subRecipeId Int?
+  subRecipe   Recipe?  @relation("SubRecipe", fields: [subRecipeId], references: [id])
+  
+  quantity    Decimal // Net quantity required
+}
+
+model Event {
+  id        Int      @id @default(autoincrement())
+  name      String
+  dateEvent DateTime
+  pax       Int
+  
+  dishes    EventDish[]
+}
+
+model EventDish {
+  id       Int     @id @default(autoincrement())
+  eventId  Int
+  event    Event   @relation(fields: [eventId], references: [id])
+  recipeId Int
+  recipe   Recipe  @relation(fields: [recipeId], references: [id])
+  factor   Decimal @default(1.0)
+}
+
+model EmployeeTask {
+  id           Int       @id @default(autoincrement())
+  employeeId   String
+  employee     User      @relation(fields: [employeeId], references: [id])
+  recipeId     Int
+  recipe       Recipe    @relation(fields: [recipeId], references: [id])
+  
+  dateAssigned DateTime
+  timeStart    DateTime?
+  timeEnd      DateTime?
+  status       String    @default("PENDING") // PENDING, IN_PROGRESS, DONE
+}
