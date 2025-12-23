@@ -4,6 +4,7 @@ generator client {
 
 datasource db {
   provider = "sqlite"
+  url      = env("DATABASE_URL")
 }
 
 model User {
@@ -20,6 +21,8 @@ model User {
 
   tasks EmployeeTask[]
 }
+
+// --- KITCHEN / INTERNAL MODELS (Existing) ---
 
 model Provider {
   id        Int       @id @default(autoincrement())
@@ -96,4 +99,40 @@ model EmployeeTask {
   timeStart    DateTime?
   timeEnd      DateTime?
   status       String    @default("PENDING") // PENDING, IN_PROGRESS, DONE
+}
+
+// --- E-COMMERCE / SHOP MODELS (New) ---
+
+model ShopProduct {
+  id          String   @id @default(uuid())
+  name        String
+  description String?
+  price       Decimal
+  image       String?
+  category    String   // 'PACK', 'VISIT'
+  createdAt   DateTime @default(now())
+  
+  orderItems  ShopOrderItem[]
+}
+
+model ShopOrder {
+  id        String          @id @default(uuid())
+  customerEmail String
+  customerName  String?
+  total     Decimal
+  status    String          // 'PENDING', 'PAID', 'DELIVERED', 'CANCELLED'
+  createdAt DateTime        @default(now())
+  updatedAt DateTime        @updatedAt
+  
+  items     ShopOrderItem[]
+}
+
+model ShopOrderItem {
+  id            String      @id @default(uuid())
+  orderId       String
+  order         ShopOrder   @relation(fields: [orderId], references: [id])
+  productId     String
+  product       ShopProduct @relation(fields: [productId], references: [id])
+  quantity      Int
+  priceAtPurchase Decimal
 }

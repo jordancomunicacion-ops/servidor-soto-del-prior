@@ -1,182 +1,97 @@
-import Link from "next/link";
-import { ChefHat, Tractor, Globe, Server, ArrowRight, LayoutGrid, MonitorPlay, RefreshCw, Camera } from "lucide-react";
+import Link from 'next/link';
 
-export default function Home() {
-  return (
-    <div className="min-h-screen bg-zinc-950 text-zinc-100 flex flex-col selection:bg-orange-500/30">
+export default function PortalHome() {
+    return (
+        <main className="min-h-screen bg-[#0A0A0A] text-white flex flex-col items-center justify-center p-8 font-sans">
 
-      {/* Background Gradients */}
-      <div className="fixed inset-0 z-0 pointer-events-none">
-        <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-purple-500/10 rounded-full blur-[100px]" />
-        <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-orange-500/10 rounded-full blur-[100px]" />
-      </div>
-
-      <main className="flex-1 w-full max-w-7xl mx-auto px-6 py-20 z-10 flex flex-col justify-center">
-
-        {/* Header */}
-        <div className="mb-16 text-center space-y-4">
-          <div className="inline-flex items-center justify-center p-3 bg-zinc-900/50 rounded-2xl border border-zinc-800 shadow-xl mb-4">
-            <Server className="w-8 h-8 text-zinc-400" />
-          </div>
-          <h1 className="text-4xl md:text-6xl font-bold tracking-tight bg-gradient-to-b from-white to-zinc-500 bg-clip-text text-transparent">
-            Soto del Prior
-          </h1>
-          <p className="text-lg text-zinc-400 max-w-2xl mx-auto">
-            Acceso centralizado a las aplicaciones y servicios del servidor.
-          </p>
-        </div>
-
-        {/* Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-
-          {/* 1. App Ganadera */}
-          <a
-            href="http://localhost:3001"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="group relative flex flex-col p-8 bg-zinc-900/40 border border-zinc-800 rounded-3xl hover:bg-zinc-900/60 hover:border-green-600/50 transition-all duration-300 hover:shadow-2xl hover:shadow-green-900/20"
-          >
-            <div className="absolute inset-0 bg-gradient-to-br from-green-600/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity rounded-3xl" />
-
-            <div className="mb-6 p-4 bg-green-600/10 w-fit rounded-2xl group-hover:scale-110 transition-transform duration-300">
-              <Tractor className="w-8 h-8 text-green-600" />
+            {/* HEADER / LOGO */}
+            <div className="mb-12 text-center">
+                <img
+                    src="/logo-full.png"
+                    alt="SOTO DEL PRIOR"
+                    style={{ filter: 'invert(1)' }}
+                    className="h-32 mx-auto mb-6 opacity-90 hover:opacity-100 transition-opacity"
+                />
+                <p className="text-gray-400 tracking-[0.2em] text-sm md:text-base font-light font-mono">
+                    SERVIDOR CENTRAL &middot; PORTAL DE ACCESO
+                </p>
             </div>
 
-            <h3 className="text-2xl font-semibold mb-2 text-white group-hover:text-green-500 transition-colors">
-              App Ganadera
-            </h3>
-            <p className="text-zinc-400 mb-8 leading-relaxed">
-              Gestión de explotaciones, trazabilidad y control veterinario.
-            </p>
+            {/* DASHBOARD GRID */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 w-full max-w-6xl">
 
-            <div className="mt-auto flex items-center text-sm font-medium text-green-600 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300">
-              Acceder <ArrowRight className="w-4 h-4 ml-2" />
-            </div>
-          </a>
+                {/* 1. WEB / TIENDA - PRIMARY */}
+                <Link href="/web" className="group relative block p-8 bg-[#151515] border border-[#333] hover:border-[#C59D5F] transition-all duration-300 hover:transform hover:-translate-y-1">
+                    <div className="absolute top-4 right-4 text-[#C59D5F] opacity-50 group-hover:opacity-100">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                    </div>
+                    <h2 className="text-2xl font-bold mb-2 font-[family-name:var(--font-heading)] group-hover:text-[#C59D5F]">WEB</h2>
+                    <p className="text-gray-500 text-sm">Web corporativa, Tienda Online y Reservas de Experiencias.</p>
+                </Link>
 
-          {/* 2. App Cocina (formerly Kitchen OS) */}
-          <Link
-            href="http://localhost:3002"
-            target="_blank"
-            className="group relative flex flex-col p-8 bg-zinc-900/40 border border-zinc-800 rounded-3xl hover:bg-zinc-900/60 hover:border-orange-500/50 transition-all duration-300 hover:shadow-2xl hover:shadow-orange-900/20"
-          >
-            <div className="absolute inset-0 bg-gradient-to-br from-orange-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity rounded-3xl" />
+                {/* 2. APP GANADERA */}
+                <a href="http://localhost:3001" target="_blank" className="group relative block p-8 bg-[#151515] border border-[#333] hover:border-[#C59D5F] transition-all duration-300 hover:transform hover:-translate-y-1">
+                    <div className="absolute top-4 right-4 text-[#C59D5F] opacity-50 group-hover:opacity-100">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" /></svg>
+                    </div>
+                    <h2 className="text-2xl font-bold mb-2 font-[family-name:var(--font-heading)] group-hover:text-[#C59D5F]">GANADERÍA</h2>
+                    <p className="text-gray-500 text-sm">Control de animales, pesajes, trazabilidad y genealogía.</p>
+                    <span className="block mt-4 text-xs font-mono text-gray-600 bg-black/50 px-2 py-1 w-fit rounded">Puerto 3001</span>
+                </a>
 
-            <div className="mb-6 p-4 bg-orange-500/10 w-fit rounded-2xl group-hover:scale-110 transition-transform duration-300">
-              <ChefHat className="w-8 h-8 text-orange-500" />
-            </div>
+                {/* 3. APP COCINA */}
+                <a href="http://localhost:3002" target="_blank" className="group relative block p-8 bg-[#151515] border border-[#333] hover:border-[#C59D5F] transition-all duration-300 hover:transform hover:-translate-y-1">
+                    <div className="absolute top-4 right-4 text-[#C59D5F] opacity-50 group-hover:opacity-100">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4" /></svg>
+                    </div>
+                    <h2 className="text-2xl font-bold mb-2 font-[family-name:var(--font-heading)] group-hover:text-[#C59D5F]">COCINA</h2>
+                    <p className="text-gray-500 text-sm">Escandallos, fichas técnicas, inventario y gestión de eventos.</p>
+                    <span className="block mt-4 text-xs font-mono text-gray-600 bg-black/50 px-2 py-1 w-fit rounded">Puerto 3002</span>
+                </a>
 
-            <h3 className="text-2xl font-semibold mb-2 text-white group-hover:text-orange-400 transition-colors">
-              App Cocina
-            </h3>
-            <p className="text-zinc-400 mb-8 leading-relaxed">
-              Sistema integral de gestión de cocina, eventos y escandallos.
-            </p>
+                {/* 4. RESERVAS (Moved Up) */}
+                <Link href="/reservas" className="group relative block p-8 bg-[#151515] border border-[#333] hover:border-[#C59D5F] transition-all duration-300 hover:transform hover:-translate-y-1">
+                    <div className="absolute top-4 right-4 text-[#C59D5F] opacity-50 group-hover:opacity-100">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
+                    </div>
+                    <h2 className="text-2xl font-bold mb-2 font-[family-name:var(--font-heading)] group-hover:text-[#C59D5F]">RESERVAS</h2>
+                    <p className="text-gray-500 text-sm">Gestión completa de reservas, motor de reservas y tarifas.</p>
+                    <span className="block mt-4 text-xs font-mono text-gray-600 bg-black/50 px-2 py-1 w-fit rounded">Puerto 3003</span>
+                </Link>
 
-            <div className="mt-auto flex items-center text-sm font-medium text-orange-500 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300">
-              Acceder <ArrowRight className="w-4 h-4 ml-2" />
-            </div>
-          </Link>
+                {/* 5. TPV */}
+                <Link href="/tpv" className="group relative block p-8 bg-[#151515] border border-[#333] hover:border-[#C59D5F] transition-all duration-300 hover:transform hover:-translate-y-1">
+                    <div className="absolute top-4 right-4 text-[#C59D5F] opacity-50 group-hover:opacity-100">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z" /></svg>
+                    </div>
+                    <h2 className="text-2xl font-bold mb-2 font-[family-name:var(--font-heading)] group-hover:text-[#C59D5F]">TPV</h2>
+                    <p className="text-gray-500 text-sm">Terminales Punto de Venta (Obrador, Restaurante...).</p>
+                </Link>
 
-          {/* 3. Web Soto del Prior */}
-          <Link
-            href="/web/index.html"
-            target="_blank"
-            className="group relative flex flex-col p-8 bg-zinc-900/40 border border-zinc-800 rounded-3xl hover:bg-zinc-900/60 hover:border-purple-500/50 transition-all duration-300 hover:shadow-2xl hover:shadow-purple-900/20"
-          >
-            <div className="absolute inset-0 bg-gradient-to-br from-purple-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity rounded-3xl" />
+                {/* 6. VIDEOVIGILANCIA */}
+                <Link href="/cameras" className="group relative block p-8 bg-[#151515] border border-[#333] hover:border-[#C59D5F] transition-all duration-300 hover:transform hover:-translate-y-1">
+                    <div className="absolute top-4 right-4 text-[#C59D5F] opacity-50 group-hover:opacity-100">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" /></svg>
+                    </div>
+                    <h2 className="text-2xl font-bold mb-2 font-[family-name:var(--font-heading)] group-hover:text-[#C59D5F]">VIDEOVIGILANCIA</h2>
+                    <p className="text-gray-500 text-sm">Visualización de cámaras de corrales, obrador y accesos.</p>
+                </Link>
 
-            <div className="mb-6 p-4 bg-purple-500/10 w-fit rounded-2xl group-hover:scale-110 transition-transform duration-300">
-              <Globe className="w-8 h-8 text-purple-500" />
-            </div>
+                {/* 7. SISTEMAS */}
+                <Link href="/sistemas" className="group relative block p-8 bg-[#151515] border border-[#333] hover:border-[#C59D5F] transition-all duration-300 hover:transform hover:-translate-y-1">
+                    <div className="absolute top-4 right-4 text-[#C59D5F] opacity-50 group-hover:opacity-100">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M5 12h14M5 12a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v4a2 2 0 01-2 2M5 12a2 2 0 00-2 2v4a2 2 0 002 2h14a2 2 0 002-2v-4a2 2 0 00-2-2m-2-4h.01M17 16h.01" /></svg>
+                    </div>
+                    <h2 className="text-2xl font-bold mb-2 font-[family-name:var(--font-heading)] group-hover:text-[#C59D5F]">SISTEMAS</h2>
+                    <p className="text-gray-500 text-sm">Gestión de dominios, cuentas de correo e infraestructura.</p>
+                </Link>
 
-            <h3 className="text-2xl font-semibold mb-2 text-white group-hover:text-purple-400 transition-colors">
-              Soto del Prior
-            </h3>
-            <p className="text-zinc-400 mb-8 leading-relaxed">
-              Web Pública - Versión Local.
-            </p>
-
-            <div className="mt-auto flex items-center justify-between">
-              <div className="flex items-center text-sm font-medium text-purple-500 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300">
-                Visitar <ArrowRight className="w-4 h-4 ml-2" />
-              </div>
-            </div>
-          </Link>
-
-          {/* 4. TPV Ágora */}
-          <div className="group relative flex flex-col p-8 bg-zinc-900/40 border border-zinc-800 rounded-3xl hover:bg-zinc-900/60 hover:border-green-500/50 transition-all duration-300 hover:shadow-2xl hover:shadow-green-900/20 cursor-pointer">
-            <div className="absolute inset-0 bg-gradient-to-br from-green-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity rounded-3xl" />
-
-            <div className="mb-6 p-4 bg-green-500/10 w-fit rounded-2xl group-hover:scale-110 transition-transform duration-300">
-              <MonitorPlay className="w-8 h-8 text-green-500" />
-            </div>
-
-            <h3 className="text-2xl font-semibold mb-2 text-white group-hover:text-green-400 transition-colors">
-              TPV Ágora
-            </h3>
-            <p className="text-zinc-400 mb-8 leading-relaxed">
-              Consulta de informes y cierre de caja.
-            </p>
-
-            <div className="mt-auto flex items-center text-sm font-medium text-green-500 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300">
-              Ver Informes <ArrowRight className="w-4 h-4 ml-2" />
-            </div>
-          </div>
-
-          {/* 5. CoverManager */}
-          <a
-            href="https://www.covermanager.com/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="group relative flex flex-col p-8 bg-zinc-900/40 border border-zinc-800 rounded-3xl hover:bg-zinc-900/60 hover:border-blue-500/50 transition-all duration-300 hover:shadow-2xl hover:shadow-blue-900/20"
-          >
-            <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity rounded-3xl" />
-
-            <div className="mb-6 p-4 bg-blue-500/10 w-fit rounded-2xl group-hover:scale-110 transition-transform duration-300">
-              <LayoutGrid className="w-8 h-8 text-blue-500" />
             </div>
 
-            <h3 className="text-2xl font-semibold mb-2 text-white group-hover:text-blue-400 transition-colors">
-              CoverManager
-            </h3>
-            <p className="text-zinc-400 mb-8 leading-relaxed">
-              Motor de reservas y hospitalidad.
-            </p>
-
-            <div className="mt-auto flex items-center text-sm font-medium text-blue-500 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300">
-              Abrir Web <ArrowRight className="w-4 h-4 ml-2" />
-            </div>
-          </a>
-
-          {/* 6. Videovigilancia */}
-          <div className="group relative flex flex-col p-8 bg-zinc-900/40 border border-zinc-800 rounded-3xl hover:bg-zinc-900/60 hover:border-red-500/50 transition-all duration-300 hover:shadow-2xl hover:shadow-red-900/20 cursor-pointer">
-            <div className="absolute inset-0 bg-gradient-to-br from-red-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity rounded-3xl" />
-
-            <div className="mb-6 p-4 bg-red-500/10 w-fit rounded-2xl group-hover:scale-110 transition-transform duration-300">
-              <Camera className="w-8 h-8 text-red-500" />
-            </div>
-
-            <h3 className="text-2xl font-semibold mb-2 text-white group-hover:text-red-400 transition-colors">
-              Videovigilancia
-            </h3>
-            <p className="text-zinc-400 mb-8 leading-relaxed">
-              Monitoreo de cámaras de seguridad en tiempo real.
-            </p>
-
-            <div className="mt-auto flex items-center text-sm font-medium text-red-500 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300">
-              Ver Cámaras <ArrowRight className="w-4 h-4 ml-2" />
-            </div>
-          </div>
-
-        </div>
-
-        {/* Footer */}
-        <div className="mt-20 text-center text-sm text-zinc-600">
-          <p>© 2025 Server Portal System. Internal Use Only.</p>
-        </div>
-
-      </main>
-    </div>
-  );
+            {/* FOOTER */}
+            <footer className="mt-20 text-xs text-gray-600 tracking-wider">
+                SYSTEM V2.0 &middot; SOTO DEL PRIOR &middot; {new Date().getFullYear()}
+            </footer>
+        </main>
+    );
 }
