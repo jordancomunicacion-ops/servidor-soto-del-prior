@@ -1,36 +1,35 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Servidor SOTOdelPRIOR (Central Hub)
 
-## Getting Started
+El punto de entrada principal para el ecosistema digital de Soto del Prior. Este proyecto actúa como Dashboard unificado para acceder a todos los subsistemas.
 
-First, run the development server:
+## 🏗️ Arquitectura del Sistema
 
+El sistema está organizado en micro-servicios y aplicaciones modulares corriendo en el mismo servidor.
+
+### 🔌 Mapa de Puertos Asignados
+
+| Aplicación | Puerto | Tecnología | Estado |
+| :--- | :--- | :--- | :--- |
+| **Servidor Central (Hub)** | `3000` | Next.js 16 | ✅ Producción |
+| **Motor Reservas (Web)** | `3001` | Next.js 16 | ✅ Producción |
+| **App Cocina** | `3002` | Next.js (TBD) | 🚧 Reservado |
+| **App Ganadera** | `3003` | Next.js (TBD) | ⏳ Pendiente |
+| **Motor Reservas (API)** | `4000` | NestJS | ✅ Producción |
+
+### 🔗 Servicios Externos
+Estos servicios funcionan con software independiente y no consumen puertos de Node.js gestionados por este repo.
+- **TPV (Agora)**: Software externo.
+- **Videovigilancia**: Software externo / DVR.
+
+## 🚀 Despliegue
+
+### Requisitos
+- Node.js 20+
+- Git
+
+### Iniciar Hub Central
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+# Acceso en http://localhost:3000
 ```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
