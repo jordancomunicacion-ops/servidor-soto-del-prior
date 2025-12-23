@@ -32,7 +32,7 @@ export default function BookingHubPage() {
                         </CardContent>
                         <CardFooter>
                             <Button asChild className="w-full text-lg" size="lg">
-                                <Link href="http://localhost:3003/admin" target="_blank">
+                                <Link href="http://localhost:3001/admin" target="_blank">
                                     Abrir Panel de Control ↗
                                 </Link>
                             </Button>
@@ -55,7 +55,7 @@ export default function BookingHubPage() {
                         </CardContent>
                         <CardFooter>
                             <Button asChild variant="secondary" className="w-full text-lg" size="lg">
-                                <Link href="http://localhost:3003/admin/widget-config" target="_blank">
+                                <Link href="http://localhost:3001/admin/widget-config" target="_blank">
                                     Abrir Configuración ↗
                                 </Link>
                             </Button>
@@ -77,7 +77,7 @@ export default function BookingHubPage() {
                                 La interfaz de reservas para que tus huéspedes reserven habitaciones.
                             </p>
                             <Button asChild variant="outline" className="w-full border-blue-300 hover:bg-blue-100 text-blue-700">
-                                <Link href="http://localhost:3003/widget" target="_blank">
+                                <Link href="http://localhost:3001/widget" target="_blank">
                                     Ver Widget en Vivo
                                 </Link>
                             </Button>
@@ -97,7 +97,7 @@ export default function BookingHubPage() {
                                 El sistema de reserva de mesas para comensales.
                             </p>
                             <Button asChild variant="outline" className="w-full border-orange-300 hover:bg-orange-100 text-orange-700">
-                                <Link href="http://localhost:3003/widget/restaurant" target="_blank">
+                                <Link href="http://localhost:3001/widget/restaurant" target="_blank">
                                     Ver Widget en Vivo
                                 </Link>
                             </Button>
