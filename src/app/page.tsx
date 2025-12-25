@@ -30,13 +30,13 @@ export default function PortalHome() {
                 </Link>
 
                 {/* 2. APP GANADERA */}
-                <a href="http://localhost:3001" target="_blank" className="group relative block p-8 bg-[#151515] border border-[#333] hover:border-[#C59D5F] transition-all duration-300 hover:transform hover:-translate-y-1">
+                <a href="http://localhost:3003" target="_blank" className="group relative block p-8 bg-[#151515] border border-[#333] hover:border-[#C59D5F] transition-all duration-300 hover:transform hover:-translate-y-1">
                     <div className="absolute top-4 right-4 text-[#C59D5F] opacity-50 group-hover:opacity-100">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" /></svg>
                     </div>
                     <h2 className="text-2xl font-bold mb-2 font-[family-name:var(--font-heading)] group-hover:text-[#C59D5F]">GANADERÍA</h2>
                     <p className="text-gray-500 text-sm">Control de animales, pesajes, trazabilidad y genealogía.</p>
-                    <span className="block mt-4 text-xs font-mono text-gray-600 bg-black/50 px-2 py-1 w-fit rounded">Puerto 3001</span>
+                    <span className="block mt-4 text-xs font-mono text-gray-600 bg-black/50 px-2 py-1 w-fit rounded">Puerto 3003</span>
                 </a>
 
                 {/* 3. APP COCINA */}
@@ -50,14 +50,24 @@ export default function PortalHome() {
                 </a>
 
                 {/* 4. RESERVAS (Moved Up) */}
-                <Link href="/reservas" className="group relative block p-8 bg-[#151515] border border-[#333] hover:border-[#C59D5F] transition-all duration-300 hover:transform hover:-translate-y-1">
+                <a href="http://localhost:3001/admin" target="_blank" className="group relative block p-8 bg-[#151515] border border-[#333] hover:border-[#C59D5F] transition-all duration-300 hover:transform hover:-translate-y-1">
                     <div className="absolute top-4 right-4 text-[#C59D5F] opacity-50 group-hover:opacity-100">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
                     </div>
                     <h2 className="text-2xl font-bold mb-2 font-[family-name:var(--font-heading)] group-hover:text-[#C59D5F]">RESERVAS</h2>
                     <p className="text-gray-500 text-sm">Gestión completa de reservas, motor de reservas y tarifas.</p>
-                    <span className="block mt-4 text-xs font-mono text-gray-600 bg-black/50 px-2 py-1 w-fit rounded">Puerto 3003</span>
-                </Link>
+                    <span className="block mt-4 text-xs font-mono text-gray-600 bg-black/50 px-2 py-1 w-fit rounded">Puerto 3001</span>
+                </a>
+
+                {/* 5. CRM & CAMPAIGNS */}
+                <a href="http://localhost:3004" target="_blank" className="group relative block p-8 bg-[#151515] border border-[#333] hover:border-[#C59D5F] transition-all duration-300 hover:transform hover:-translate-y-1">
+                    <div className="absolute top-4 right-4 text-[#C59D5F] opacity-50 group-hover:opacity-100">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M11 3.055A9.001 9.001 0 1020.945 13H11V3.055z" /><path strokeLinecap="round" strokeLinejoin="round" d="M20.488 9H15V3.512A9.025 9.025 0 0120.488 9z" /></svg>
+                    </div>
+                    <h2 className="text-2xl font-bold mb-2 font-[family-name:var(--font-heading)] group-hover:text-[#C59D5F]">MARKETING & CRM</h2>
+                    <p className="text-gray-500 text-sm">Automatización de campañas, Social Analytics e Inteligencia de cliente.</p>
+                    <span className="block mt-4 text-xs font-mono text-gray-600 bg-black/50 px-2 py-1 w-fit rounded">Puerto 3004</span>
+                </a>
 
                 {/* 5. TPV */}
                 <Link href="/tpv" className="group relative block p-8 bg-[#151515] border border-[#333] hover:border-[#C59D5F] transition-all duration-300 hover:transform hover:-translate-y-1">

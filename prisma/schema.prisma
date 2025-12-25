@@ -119,6 +119,10 @@ model ShopOrder {
   id        String          @id @default(uuid())
   customerEmail String
   customerName  String?
+  phone         String?
+  address       String?
+  city          String?
+  zipCode       String?
   total     Decimal
   status    String          // 'PENDING', 'PAID', 'DELIVERED', 'CANCELLED'
   createdAt DateTime        @default(now())
@@ -135,4 +139,53 @@ model ShopOrderItem {
   product       ShopProduct @relation(fields: [productId], references: [id])
   quantity      Int
   priceAtPurchase Decimal
+}
+
+// --- MARKETING & CRM (New Module) ---
+
+model CustomerProfile {
+  id        String   @id @default(uuid())
+  email     String?  @unique
+  phone     String?
+  firstName String?
+  lastName  String?
+  
+  // Aggregated Stats
+  systemTags     String? // "HOTEL_GUEST", "RESTAURANT_DINER", "SHOP_BUYER"
+  totalSpend     Decimal @default(0)
+  lastInteraction DateTime?
+  
+  // Consent
+  consentEmail    Boolean @default(false)
+  consentWhatsApp Boolean @default(false)
+  
+  campaigns      CampaignLog[]
+  
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Campaign {
+  id          String   @id @default(uuid())
+  name        String
+  type        String   // "EMAIL", "WHATSAPP"
+  status      String   // "DRAFT", "SCHEDULED", "SENT"
+  subject     String?
+  content     String   // HTML or Template
+  
+  sentCount   Int      @default(0)
+  createdAt   DateTime @default(now())
+  
+  logs        CampaignLog[]
+}
+
+model CampaignLog {
+  id          String   @id @default(uuid())
+  campaignId  String
+  campaign    Campaign @relation(fields: [campaignId], references: [id])
+  customerProfileId String
+  customerProfile CustomerProfile @relation(fields: [customerProfileId], references: [id])
+  
+  status      String   // "SENT", "OPENED", "CLICKED", "FAILED"
+  sentAt      DateTime @default(now())
 }

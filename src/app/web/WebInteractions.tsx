@@ -1,11 +1,49 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, Suspense } from 'react';
+import { useSearchParams, useRouter } from 'next/navigation';
 
-export default function WebInteractions() {
+function WebInteractionsContent() {
+    const searchParams = useSearchParams();
+    const router = useRouter();
+
+    // Captcha Logic
     const [captchaAnswer, setCaptchaAnswer] = useState(0);
     const [captchaQuestion, setCaptchaQuestion] = useState('2 + 3');
 
+    // Modals
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [isSuccessModalOpen, setIsSuccessModalOpen] = useState(false);
+    const [orderId, setOrderId] = useState<string | null>(null);
+
+    // Check for payment success
+    useEffect(() => {
+        const isSuccess = searchParams.get('payment_success') === 'true';
+        const oid = searchParams.get('order_id');
+
+        if (isSuccess && oid) {
+            setIsSuccessModalOpen(true);
+            setOrderId(oid);
+
+            // Trigger Email Notification (Idempotency check ideally needed server side, or trust client state for now)
+            // To avoid double sending on re-renders, we could use a ref, but useEffect dependency on params handles it mostly.
+            // Better: remove param immediately? No, we need it for modal.
+            // Let's just fire it.
+            fetch('/api/orders/notify', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ orderId: oid })
+            }).catch(console.error);
+        }
+    }, [searchParams]);
+
+    const closeSuccessModal = () => {
+        setIsSuccessModalOpen(false);
+        // Clear params
+        router.replace('/web');
+    };
+
+    // ... (Existing Scroll Logic) ...
     useEffect(() => {
         // --- 1. Vertical to Horizontal Scroll Mapping ---
         const scroller = document.querySelector('.horizontal-scroller');
@@ -13,15 +51,12 @@ export default function WebInteractions() {
         if (!scroller) return;
 
         const handleWheel = (evt: WheelEvent) => {
-            // If specific horizontal scroll is detected (e.g. trackpad), let it happen naturally
             if (Math.abs(evt.deltaX) > Math.abs(evt.deltaY)) {
                 return;
             }
 
-            // Only hijack vertical scrolling
             if (Math.abs(evt.deltaY) > 0) {
                 evt.preventDefault();
-
                 scroller.scrollBy({
                     left: evt.deltaY * 3,
                     behavior: 'auto'
@@ -31,7 +66,7 @@ export default function WebInteractions() {
 
         window.addEventListener('wheel', handleWheel, { passive: false });
 
-        // --- 2. Navigation Handling (Smooth Scroll to Section) ---
+        // --- 2. Navigation Handling ---
         const scrollToPosition = (leftPosition: number) => {
             scroller.scrollTo({
                 left: leftPosition,
@@ -39,16 +74,14 @@ export default function WebInteractions() {
             });
         };
 
-        // A. Logo "Back to Start" Logic
         const logoLink = document.querySelector('.logo-link');
         if (logoLink) {
             logoLink.addEventListener('click', (e) => {
-                e.preventDefault(); // Prevent jump
-                scrollToPosition(0); // Scroll to very beginning
+                e.preventDefault();
+                scrollToPosition(0);
             });
         }
 
-        // B. General Navigation Links (Anchors)
         const anchors = document.querySelectorAll('a[href^="#"]');
         anchors.forEach(anchor => {
             anchor.addEventListener('click', (e) => {
@@ -60,8 +93,6 @@ export default function WebInteractions() {
                 const targetSection = document.getElementById(targetId);
                 if (targetSection) {
                     e.preventDefault();
-                    // If it's inside the scroller, use offsetLeft.
-                    // Note: sticky header might affect this if we were vertical, but horizontal is usually simpler.
                     scrollToPosition(targetSection.offsetLeft);
                 }
             });
@@ -69,17 +100,8 @@ export default function WebInteractions() {
 
         return () => {
             window.removeEventListener('wheel', handleWheel);
-            // Clean up other listeners if strictly necessary, but they are attached to DOM elements that might persist
         };
     }, []);
-
-    // --- 3. Modal Logic (Managed via React State ideally, but let's stick to DOM manipulation for parity with styles) ---
-    // Actually, standard React event handlers on the JSX elements are cleaner than global listeners.
-    // I will move the modal logic to functions exported here or just keep the effect if I'm lazy, 
-    // BUT the JSX in page.tsx will need onclicks.
-    // Let's do hybrid: The scroll hijacking is global. The modal can be controlled by React state here.
-
-    const [isModalOpen, setIsModalOpen] = useState(false);
 
     const generateCaptcha = () => {
         const num1 = Math.floor(Math.random() * 10) + 1;
@@ -88,7 +110,7 @@ export default function WebInteractions() {
         setCaptchaQuestion(`${num1} + ${num2}`);
     };
 
-    const openModal = (e: React.MouseEvent) => {
+    const openModal = (e: Event) => {
         e.preventDefault();
         generateCaptcha();
         setIsModalOpen(true);
@@ -97,6 +119,20 @@ export default function WebInteractions() {
     const closeModal = () => {
         setIsModalOpen(false);
     };
+
+    // Attach listeners for Contact Modal
+    useEffect(() => {
+        const contactTrigger = document.getElementById('trigger-contact-modal');
+        const eventTrigger = document.getElementById('trigger-event-modal');
+
+        if (contactTrigger) contactTrigger.addEventListener('click', openModal);
+        if (eventTrigger) eventTrigger.addEventListener('click', openModal);
+
+        return () => {
+            if (contactTrigger) contactTrigger.removeEventListener('click', openModal);
+            if (eventTrigger) eventTrigger.removeEventListener('click', openModal);
+        };
+    }, []);
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -109,51 +145,20 @@ export default function WebInteractions() {
             return;
         }
 
-        // Mailto logic
         const name = formData.get('name');
         const email = formData.get('email');
         const message = formData.get('message');
-
         const subject = `Nuevo mensaje de contacto de ${name}`;
         const body = `Nombre: ${name}%0D%0ACorreo: ${email}%0D%0AMensaje:%0D%0A${message}`;
 
         window.location.href = `mailto:info@sotodelprior.com?subject=${subject}&body=${body}`;
-
         closeModal();
         (e.target as HTMLFormElement).reset();
     };
 
-    // We need to expose the openModal function to the parent or attach it via ID?
-    // Since page.tsx is server side, we can't pass functions up easily.
-    // Alternative: Render the buttons AND the modal INSIDE this client component?
-    // Or just put the `onClick` logic for the specific buttons (Contact/Eventos) on a wrapper?
-
-    // To keep it simple and match "exact HTML structure":
-    // I will use `useEffect` to attach listeners to the IDs `trigger-contact-modal` and `trigger-event-modal`
-    // if they exist in the DOM. This mimics the original script.js exactly.
-
-    useEffect(() => {
-        const contactTrigger = document.getElementById('trigger-contact-modal');
-        const eventTrigger = document.getElementById('trigger-event-modal');
-
-        const handleOpen = (e: Event) => {
-            e.preventDefault();
-            generateCaptcha();
-            setIsModalOpen(true);
-        };
-
-        if (contactTrigger) contactTrigger.addEventListener('click', handleOpen);
-        if (eventTrigger) eventTrigger.addEventListener('click', handleOpen);
-
-        return () => {
-            if (contactTrigger) contactTrigger.removeEventListener('click', handleOpen);
-            if (eventTrigger) eventTrigger.removeEventListener('click', handleOpen);
-        };
-    }, []);
-
     return (
         <>
-            {/* Modal structure */}
+            {/* CONTACT MODAL */}
             <div id="contact-modal" className={`modal-overlay ${isModalOpen ? '' : 'hidden'}`} onClick={(e) => { if (e.target === e.currentTarget) closeModal(); }}>
                 <div className="modal-content">
                     <button id="close-modal" className="close-btn" onClick={closeModal}>&times;</button>
@@ -171,17 +176,40 @@ export default function WebInteractions() {
                             <label htmlFor="contact-message">MENSAJE</label>
                             <textarea id="contact-message" name="message" rows={4} required placeholder="¿En qué podemos ayudarte?"></textarea>
                         </div>
-
-                        {/* CAPTCHA */}
                         <div className="form-group captcha-group">
                             <label htmlFor="captcha-input">¿Cuánto es <span id="captcha-question">{captchaQuestion}</span>?</label>
                             <input type="number" id="captcha-input" name="captcha" required placeholder="Respuesta" />
                         </div>
-
                         <button type="submit" className="btn-submit">ENVIAR</button>
                     </form>
                 </div>
             </div>
+
+            {/* SUCCESS MODAL */}
+            <div className={`modal-overlay ${isSuccessModalOpen ? '' : 'hidden'}`} onClick={(e) => { if (e.target === e.currentTarget) closeSuccessModal(); }} style={{ zIndex: 3000 }}>
+                <div className="modal-content text-center">
+                    <button className="close-btn" onClick={closeSuccessModal}>&times;</button>
+                    <h2 className="modal-title" style={{ color: '#C59D5F' }}>¡PEDIDO CONFIRMADO!</h2>
+                    <p className="description" style={{ margin: '2rem 0', color: '#000' }}>
+                        Muchas gracias por tu compra. Hemos recibido tu pedido correctamente.
+                    </p>
+                    {orderId && (
+                        <div className="bg-gray-100 p-4 rounded mb-6">
+                            <p className="text-xs text-gray-500 uppercase tracking-widest">ID del Pedido</p>
+                            <p className="text-xl font-bold font-mono text-black">{orderId}</p>
+                        </div>
+                    )}
+                    <button className="btn-submit" onClick={closeSuccessModal}>VOLVER AL INICIO</button>
+                </div>
+            </div>
         </>
+    );
+}
+
+export default function WebInteractions() {
+    return (
+        <Suspense fallback={null}>
+            <WebInteractionsContent />
+        </Suspense>
     );
 }

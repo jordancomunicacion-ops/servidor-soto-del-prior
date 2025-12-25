@@ -42,7 +42,7 @@ export default function StripeWrapper({ total, items }: { total: number, items: 
 
     return (
         <Elements options={options} stripe={stripePromise}>
-            <CheckoutForm total={total} />
+            <CheckoutForm total={total} items={items} />
         </Elements>
     );
 }

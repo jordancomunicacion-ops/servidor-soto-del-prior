@@ -2,7 +2,7 @@ import { prisma } from '@/lib/prisma';
 import WebInteractions from './WebInteractions';
 import BuyButton from './BuyButton';
 import StoreHeader from './StoreHeader';
-import CartSidebar from './CartSidebar';
+import CartSidebar from './CartSidebarFinal'; // UPDATED to Final Version
 
 async function getProducts() {
   try {
@@ -27,7 +27,7 @@ export default async function Home() {
   const visitProduct = products.find(p => p.name.includes("Visita"));
 
   return (
-    <main>
+    <main className="web-root">
       {/* Dynamic Header with Cart State */}
       <StoreHeader />
       <CartSidebar />
@@ -56,8 +56,8 @@ export default async function Home() {
             </p>
             {/* CoverManager Booking Engine */}
             <div className="booking-widget-container">
-              <iframe src="https://www.covermanager.com/reservation/module_restaurant/sotodelprior/spanish"
-                frameBorder="0" height="550" width="100%" title="Reserva tu mesa"></iframe>
+              <iframe src="http://localhost:3001/widget/restaurant"
+                frameBorder="0" height="600" width="100%" title="Reserva tu mesa"></iframe>
             </div>
           </div>
           <div className="split-visual">
@@ -93,7 +93,7 @@ export default async function Home() {
             </p>
             {/* Avirato Booking Engine */}
             <div className="booking-widget-container">
-              <iframe src="https://booking.avirato.com/?code=SotoDelPriorDemo" frameBorder="0" height="550"
+              <iframe src="http://localhost:3001/widget" frameBorder="0" height="600"
                 width="100%" title="Reserva tu estancia"></iframe>
             </div>
           </div>
@@ -116,14 +116,23 @@ export default async function Home() {
                 <h3>{menuProduct?.name || "MENÚ DEGUSTACIÓN"}</h3>
                 <p className="product-detail">{menuProduct?.description || "6 Pases"}</p>
                 <p className="product-price">{menuProduct ? menuProduct.price + '€' : "70€"}</p>
-                {menuProduct ? <BuyButton product={menuProduct} /> : <button className="btn-product">COMPRAR</button>}
+                {/* Image passed via spread or explicit prop if BuyButton supports it. BuyButton takes 'product'. 
+                    I'll construct a synthetic product object with the image. 
+                */}
+                <BuyButton product={{
+                  ...(menuProduct || { id: 'menu-degustacion', name: 'MENÚ DEGUSTACIÓN', price: 70 }),
+                  image: '/web/assets/menu_degustacion.png'
+                }} />
               </div>
               {/* DYNAMIC PRODUCT 2: PACK */}
               <div className="product-card">
                 <h3>{packProduct?.name || "PACK ARTESANAL"}</h3>
                 <p className="product-detail">{packProduct?.description || "Chorizo, salchichón y cecina..."}</p>
                 <p className="product-price">{packProduct ? packProduct.price + '€' : "50€"}</p>
-                {packProduct ? <BuyButton product={packProduct} /> : <button className="btn-product">COMPRAR</button>}
+                <BuyButton product={{
+                  ...(packProduct || { id: 'pack-artesanal', name: 'PACK ARTESANAL', price: 50 }),
+                  image: '/web/assets/pack_artesanal.png'
+                }} />
               </div>
             </div>
           </div>
@@ -140,7 +149,10 @@ export default async function Home() {
             </div>
             <div className="card-actions">
               <p className="product-price">{visitProduct ? visitProduct.price + '€' : "20€"}</p>
-              {visitProduct ? <BuyButton product={visitProduct} /> : <button className="btn-product">COMPRAR</button>}
+              <BuyButton product={{
+                ...(visitProduct || { id: 'visita-granja', name: 'VISITA A LA GRANJA', price: 20 }),
+                image: '/web/assets/visita_granja.png'
+              }} />
             </div>
           </div>
         </section>
