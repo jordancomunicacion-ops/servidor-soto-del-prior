@@ -1,25 +1,24 @@
 @echo off
-echo Iniciando Sistema SOTO del PRIOR...
+echo ========================================================
+echo      SISTEMA SOTO DEL PRIOR - INICIO AUTOMATICO
+echo ========================================================
 echo.
 
-:: 1. Iniciar App Ganadera (Puerto 3001)
-echo Iniciando App Ganadera (Puerto 3001)...
-start "App Ganadera" cmd /k "cd /d "c:\Users\Carlos\SOTOdelPRIOR\App control ganadero SOTOdelPRIOR" && npm run dev"
+:: 1. MOTOR DE RESERVAS (API) - Puerto 4000
+echo [1/3] Iniciando Motor API (Backend) en Puerto 4000...
+start "Motor API (:4000)" cmd /k "cd /d "c:\Users\Carlos\SOTOdelPRIOR\Motor reservas SOTOdelPRIOR\apps\api" && npm run start:dev"
 
-:: 2. Iniciar App Cocina (Puerto 3002)
-echo Iniciando App Cocina (Puerto 3002)...
-start "App Cocina" cmd /k "cd /d "c:\Users\Carlos\SOTOdelPRIOR\App cocina SOTOdelPRIOR" && npm run dev"
+:: 2. MOTOR DE RESERVAS (WEB) - Puerto 3001
+echo [2/3] Iniciando Motor Web (Widget) en Puerto 3001...
+start "Motor Web (:3001)" cmd /k "cd /d "c:\Users\Carlos\SOTOdelPRIOR\Motor reservas SOTOdelPRIOR\apps\web" && npm run dev"
 
-:: 3. Iniciar Motor API (Puerto 3004)
-echo Iniciando Motor API (Puerto 3004)...
-start "Motor API" cmd /k "cd /d "c:\Users\Carlos\SOTOdelPRIOR\Motor reservas SOTOdelPRIOR\apps\api" && set PORT=3004 && npm run start:dev"
+:: 3. SERVIDOR CENTRAL (HUB) - Puerto 3000
+echo [3/3] Iniciando Servidor Central (Hub) en Puerto 3000...
+echo.
+echo NOTA: Las App Ganadera (3003) y Cocina (3002) estan pendientes.
+echo.
+echo Cerrar esta ventana apagara el Servidor Central.
+echo.
 
-:: 4. Iniciar Motor Web (Puerto 3003)
-echo Iniciando Motor Web (Puerto 3003)...
-start "Motor Web" cmd /k "cd /d "c:\Users\Carlos\SOTOdelPRIOR\Motor reservas SOTOdelPRIOR\apps\web" && npm run dev"
-
-:: 5. Iniciar Servidor Principal / Dashboard (Puerto 3000)
-echo Iniciando Servidor Principal (Puerto 3000)...
-echo Este servidor se quedara abierto en esta ventana.
 cd /d "c:\Users\Carlos\SOTOdelPRIOR\Servidor SOTOdelPRIOR"
 npm run dev
