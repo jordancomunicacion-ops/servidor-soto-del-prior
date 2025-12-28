@@ -17,6 +17,9 @@ const lato = Lato({
 export const metadata: Metadata = {
   title: "SOTO del PRIOR | Origen y Calidad Suprema",
   description: "Antes que cocineros, somos ganaderos.",
+  icons: {
+    icon: "/icon.png",
+  },
 };
 
 export default function RootLayout({
