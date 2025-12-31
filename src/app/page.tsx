@@ -88,12 +88,12 @@ export default function PortalHome() {
                 </Link>
 
                 {/* 7. SISTEMAS */}
-                <Link href="/sistemas" className="group relative block p-8 bg-[#151515] border border-[#333] hover:border-[#C59D5F] transition-all duration-300 hover:transform hover:-translate-y-1">
+                <Link href="/infrastructure" className="group relative block p-8 bg-[#151515] border border-[#333] hover:border-[#C59D5F] transition-all duration-300 hover:transform hover:-translate-y-1">
                     <div className="absolute top-4 right-4 text-[#C59D5F] opacity-50 group-hover:opacity-100">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M5 12h14M5 12a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v4a2 2 0 01-2 2M5 12a2 2 0 00-2 2v4a2 2 0 002 2h14a2 2 0 002-2v-4a2 2 0 00-2-2m-2-4h.01M17 16h.01" /></svg>
                     </div>
-                    <h2 className="text-2xl font-bold mb-2 font-[family-name:var(--font-heading)] group-hover:text-[#C59D5F]">SISTEMAS</h2>
-                    <p className="text-gray-500 text-sm">Gestión de dominios, cuentas de correo e infraestructura.</p>
+                    <h2 className="text-2xl font-bold mb-2 font-[family-name:var(--font-heading)] group-hover:text-[#C59D5F]">INFRAESTRUCTURA</h2>
+                    <p className="text-gray-500 text-sm">Gestión de dominios, cuentas de correo y servidor propio.</p>
                 </Link>
 
             </div>
