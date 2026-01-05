@@ -1,0 +1,8 @@
+[00:00:02.825] Server  WARN    ⚠ The "middleware" file convention is deprecated. Please use "proxy" instead. Learn more: https://nextjs.org/docs/messages/middleware-to-proxy
+[00:00:03.069] Server  LOG     ✓ Ready in 2.6s
+[00:00:08.054] Server  LOG     ○ Compiling /infrastructure ...
+[00:00:13.259] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:00:16.272] Server  ERROR   API Error: Error: Command failed: "C:\Program Files\Docker\Docker\resources\bin\docker.exe" exec soto_mailserver setup email list
+2026-01-05 00:03:23+00:00 ERROR listmailuser: '/tmp/docker-mailserver/postfix-accounts.cf' does not exist
+2026-01-05 00:03:23+00:00 ERROR listmailuser: Aborting
+
