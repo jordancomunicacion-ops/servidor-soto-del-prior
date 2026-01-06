@@ -1,5 +1,1 @@
-{
-  "/api/infrastructure/emails/route": "app/api/infrastructure/emails/route.js",
-  "/api/infrastructure/domains/route": "app/api/infrastructure/domains/route.js",
-  "/infrastructure/page": "app/infrastructure/page.js"
-}
+{}
