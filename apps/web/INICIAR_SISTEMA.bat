@@ -4,6 +4,17 @@ echo ========================================================
 echo      SISTEMA SOTO DEL PRIOR - INICIO AUTOMATICO
 echo ========================================================
 echo.
+echo ========================================================
+echo [0/7] INICIANDO INFRAESTRUCTURA DOCKER (Traefik + Ganaderia)
+echo ========================================================
+echo Iniciando Proxy (Traefik)...
+cd /d "c:\Users\Carlos\SOTOdelPRIOR\Infraestructure\proxy"
+docker compose up -d
+echo Iniciando App Ganadera (Nueva Version)...
+cd /d "c:\Users\Carlos\SOTOdelPRIOR\Infraestructure\apps\ganaderia-soto"
+docker compose up -d
+echo Infraestructura lista.
+echo.
 
 :: 1. MOTOR DE RESERVAS (API) - Puerto 4000
 echo [1/5] Iniciando Motor API (Backend) en Puerto 4000...
