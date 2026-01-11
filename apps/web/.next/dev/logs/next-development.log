@@ -1,3 +1,31 @@
 [00:00:06.455] Server  WARN    ⚠ The "middleware" file convention is deprecated. Please use "proxy" instead. Learn more: https://nextjs.org/docs/messages/middleware-to-proxy
 [00:00:08.334] Server  LOG     ✓ Ready in 7.3s
 [00:10:48.536] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:46:28.631] Server  LOG     ○ Compiling /web ...
+[00:46:30.621] Server  ERROR   ⨯ Error: @prisma/client did not initialize yet. Please run "prisma generate" and try to import it again.
+[00:46:31.769] Server  ERROR   ⨯ Error: @prisma/client did not initialize yet. Please run "prisma generate" and try to import it again.
+[00:46:35.724] Server  LOG     ○ Compiling /_error ...
+[00:46:39.956] Server  ERROR   ⨯ Error: @prisma/client did not initialize yet. Please run "prisma generate" and try to import it again.
+[00:46:40.412] Server  ERROR   ⨯ Error: @prisma/client did not initialize yet. Please run "prisma generate" and try to import it again.
+[00:46:40.901] Server  ERROR   ⨯ Error: @prisma/client did not initialize yet. Please run "prisma generate" and try to import it again.
+[00:46:41.323] Server  ERROR   ⨯ Error: @prisma/client did not initialize yet. Please run "prisma generate" and try to import it again.
+[00:46:42.011] Server  ERROR   ⨯ Error: @prisma/client did not initialize yet. Please run "prisma generate" and try to import it again.
+[00:46:42.545] Server  ERROR   ⨯ Error: @prisma/client did not initialize yet. Please run "prisma generate" and try to import it again.
+[00:46:43.250] Browser ERROR   uncaughtError: Error: @prisma/client did not initialize yet. Please run "prisma generate" and try to import it again.
+[02:01:54.285] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[02:21:40.994] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[02:21:42.485] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[02:21:44.385] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[02:21:44.725] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[02:21:46.047] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[02:21:46.491] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[02:21:46.530] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[04:00:51.441] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[04:03:13.382] Server  ERROR   API Error: Error: Command failed: "C:\Program Files\Docker\Docker\resources\bin\docker.exe" exec soto_mailserver setup email list
+2026-01-07 20:20:02+00:00 ERROR listmailuser: '/tmp/docker-mailserver/postfix-accounts.cf' does not exist
+2026-01-07 20:20:02+00:00 ERROR listmailuser: Aborting
+
+[04:03:13.557] Server  ERROR   API Error: Error: Command failed: "C:\Program Files\Docker\Docker\resources\bin\docker.exe" exec soto_mailserver setup email list
+2026-01-07 20:20:03+00:00 ERROR listmailuser: '/tmp/docker-mailserver/postfix-accounts.cf' does not exist
+2026-01-07 20:20:03+00:00 ERROR listmailuser: Aborting
+
