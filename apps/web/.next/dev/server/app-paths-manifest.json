@@ -1,6 +1,4 @@
 {
-  "/api/infrastructure/emails/route": "app/api/infrastructure/emails/route.js",
-  "/api/infrastructure/domains/route": "app/api/infrastructure/domains/route.js",
   "/page": "app/page.js",
-  "/infrastructure/page": "app/infrastructure/page.js"
+  "/web/page": "app/web/page.js"
 }
