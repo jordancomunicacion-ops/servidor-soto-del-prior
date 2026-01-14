@@ -13,6 +13,8 @@ import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
 import { revalidatePath } from "next/cache"
 
+export const dynamic = 'force-dynamic'
+
 export default async function CampaignsPage() {
     const campaigns = await getCampaigns()
 

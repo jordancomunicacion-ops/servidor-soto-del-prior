@@ -2,11 +2,15 @@ import { NextResponse } from 'next/server';
 import Stripe from 'stripe';
 
 // Initialize Stripe with Secret Key
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
-    apiVersion: '2024-12-18.acacia', // Latest API version
-});
-
 export async function POST(request: Request) {
+    if (!process.env.STRIPE_SECRET_KEY) {
+        console.error("Stripe key missing");
+        return NextResponse.json({ error: 'Internal Server Error: Stripe Config' }, { status: 500 });
+    }
+    const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
+        apiVersion: '2025-12-15.clover', // Latest API version
+    });
+
     try {
         const { items, amount } = await request.json();
 

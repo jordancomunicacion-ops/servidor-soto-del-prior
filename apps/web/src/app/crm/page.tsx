@@ -1,6 +1,8 @@
 import { getProfiles } from "../actions/crm"
 import { Badge } from "@/components/ui/badge"
 
+export const dynamic = 'force-dynamic'
+
 export default async function AudiencePage() {
     const profiles = await getProfiles()
 
