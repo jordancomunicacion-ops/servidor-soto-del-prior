@@ -1,0 +1,13 @@
+{
+    "name": "servidor-soto-del-prior-root",
+    "private": true,
+    "workspaces": [
+        "apps/*"
+    ],
+    "scripts": {
+        "dev": "npm run dev --workspaces",
+        "build": "npm run build --workspaces",
+        "start": "npm run start --workspaces",
+        "lint": "npm run lint --workspaces"
+    }
+}
